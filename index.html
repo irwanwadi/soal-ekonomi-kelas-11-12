@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Soal Ekonomi Paket C - SPNF SKB Muara Jawa</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* Pengaturan khusus saat dicetak (Print) */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .print-shadow-none {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- Navbar / Header Utama -->
+    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-40 no-print">
+        <div class="max-w-5xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <!-- Logo Vektor SKB Muara Jawa -->
+                <div class="w-12 h-12 bg-white rounded-full p-1 flex items-center justify-center shadow-md shrink-0">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <!-- Figur Merah (Atas) -->
+                        <circle cx="50" cy="18" r="10" fill="#ef4444"/>
+                        <path d="M25,22 L50,35 L75,22 L62,40 L38,40 Z" fill="#ef4444"/>
+                        <!-- Figur Hijau Kiri -->
+                        <circle cx="18" cy="42" r="10" fill="#22c55e"/>
+                        <path d="M22,25 L35,50 L22,75 L38,62 L38,38 Z" fill="#22c55e"/>
+                        <!-- Figur Hijau Kanan -->
+                        <circle cx="82" cy="42" r="10" fill="#22c55e"/>
+                        <path d="M78,25 L65,50 L78,75 L62,62 L62,38 Z" fill="#22c55e"/>
+                        <!-- Figur Kuning (Kiri Bawah) -->
+                        <circle cx="30" cy="82" r="10" fill="#eab308"/>
+                        <path d="M22,75 L50,65 L50,92 L35,78 Z" fill="#eab308"/>
+                        <!-- Figur Biru (Kanan Bawah) -->
+                        <circle cx="70" cy="82" r="10" fill="#2563eb"/>
+                        <path d="M78,75 L50,65 L50,92 L65,78 Z" fill="#2563eb"/>
+                        <!-- Lingkaran Tengah Putih -->
+                        <circle cx="50" cy="52" r="22" fill="#ffffff"/>
+                        <text x="50" y="53" font-family="Arial Black, sans-serif" font-size="14" font-weight="900" fill="#0f172a" text-anchor="middle">SKB</text>
+                        <text x="50" y="62" font-family="Arial, sans-serif" font-size="4.8" font-weight="bold" fill="#0f172a" text-anchor="middle">MUARA JAWA</text>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight">SPNF SKB MUARA JAWA</h1>
+                    <p class="text-xs sm:text-sm text-blue-200">Program Paket C • Mata Pelajaran Ekonomi (TA 2026/2027)</p>
+                </div>
+            </div>
+
+            <!-- Tombol Aksi Cepat -->
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="toggleAllExplanations()" id="btnToggleKeys" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 hover:bg-amber-400 text-slate-950 transition shadow flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i>
+                    <span id="textToggleKeys">Tampilkan Semua Kunci & Pembahasan</span>
+                </button>
+                <button onclick="window.print()" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-white/15 hover:bg-white/25 text-white border border-white/20 transition flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Cetak / PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Kontainer Utama -->
+    <main class="max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+
+        <!-- Navigasi Tab Kelas -->
+        <div class="bg-white p-2 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-col sm:flex-row gap-2 no-print">
+            <button onclick="switchTab('xi')" id="tab-xi" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 bg-blue-600 text-white shadow">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Kelas XI • Semester Ganjil</span>
+            </button>
+            <button onclick="switchTab('xii')" id="tab-xii" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Kelas XII • Semester 1 (AKM)</span>
+            </button>
+        </div>
+
+        <!-- Bar Kontrol Interaktif & Skor -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 mb-6 flex flex-col md:flex-row items-center justify-between gap-4 no-print">
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-slate-500 uppercase tracking-wider">Skor Pilihan Ganda (Maks. 60)</div>
+                    <div class="text-xl font-extrabold text-slate-800">
+                        <span id="currentScore">0</span> <span class="text-sm font-normal text-slate-400">/ 60 Poin (<span id="correctCount">0</span>/30 Benar)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
+                <div class="relative flex-1 sm:flex-initial">
+                    <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="searchInput" onkeyup="filterQuestions()" placeholder="Cari kata kunci soal..." class="w-full sm:w-56 pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <button onclick="resetAnswers()" class="px-3.5 py-2 rounded-xl text-sm font-medium text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>Reset Jawaban</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Kop Naskah Ujian Resmi -->
+        <div id="examHeaderCard" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-6 print-shadow-none">
+            <!-- Konten Kop di-render via JavaScript sesuai tab aktif -->
+        </div>
+
+        <!-- Daftar Soal Pilihan Ganda -->
+        <section class="mb-10">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-sm font-bold">A</span>
+                    <span>Soal Pilihan Ganda (30 Butir)</span>
+                </h2>
+                <span class="text-xs font-medium bg-slate-200 text-slate-700 px-3 py-1 rounded-full">Bobot: 2 Poin / Soal</span>
+            </div>
+            
+            <div id="mcqContainer" class="space-y-4">
+                <!-- Butir soal PG di-render oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- Daftar Soal Esai -->
+        <section class="mb-10 page-break">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">B</span>
+                    <span>Soal Esai / Uraian (5 Butir)</span>
+                </h2>
+                <span class="text-xs font-medium bg-slate-200 text-slate-700 px-3 py-1 rounded-full">Bobot: 8 Poin / Soal</span>
+            </div>
+
+            <div id="essayContainer" class="space-y-4">
+                <!-- Butir soal Esai di-render oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- Rekap Kunci Jawaban & Pedoman Penskoran -->
+        <section id="summarySection" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8 print-shadow-none page-break">
+            <div class="border-b border-slate-200 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-key text-amber-500"></i>
+                        <span>Rekap Kunci Jawaban & Pedoman Penskoran</span>
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-1">Diperuntukkan bagi tutor/pemeriksa SPNF SKB Muara Jawa.</p>
+                </div>
+                <button onclick="toggleSummaryTable()" class="text-xs font-semibold text-blue-600 hover:underline no-print text-left sm:text-right">
+                    Sembunyikan / Tampilkan Tabel Rekap
+                </button>
+            </div>
+
+            <div id="summaryContent">
+                <!-- Tabel Kunci Jawaban PG -->
+                <h4 class="font-bold text-sm text-slate-700 mb-3">1. Ringkasan Kunci Jawaban Pilihan Ganda</h4>
+                <div id="answerKeyGrid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 mb-6">
+                    <!-- Grid kunci di-render via JS -->
+                </div>
+
+                <!-- Tabel Pedoman Penskoran -->
+                <h4 class="font-bold text-sm text-slate-700 mb-3">2. Pedoman Penskoran Nilai Akhir</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border-collapse border border-slate-300">
+                        <thead class="bg-slate-100 text-slate-700">
+                            <tr>
+                                <th class="border border-slate-300 px-4 py-2.5">Bentuk Soal</th>
+                                <th class="border border-slate-300 px-4 py-2.5">Jumlah Soal & Bobot</th>
+                                <th class="border border-slate-300 px-4 py-2.5">Skor Maksimal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-slate-300 px-4 py-2">Pilihan Ganda</td>
+                                <td class="border border-slate-300 px-4 py-2">30 soal × 2 poin</td>
+                                <td class="border border-slate-300 px-4 py-2 font-semibold">60</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 px-4 py-2">Esai / Uraian</td>
+                                <td class="border border-slate-300 px-4 py-2">5 soal × 8 poin</td>
+                                <td class="border border-slate-300 px-4 py-2 font-semibold">40</td>
+                            </tr>
+                            <tr class="bg-blue-50 font-bold text-blue-900">
+                                <td class="border border-slate-300 px-4 py-2">Total Nilai Akhir</td>
+                                <td class="border border-slate-300 px-4 py-2">Skor Pilihan Ganda + Skor Esai</td>
+                                <td class="border border-slate-300 px-4 py-2">100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p id="scoringNotes" class="text-xs text-slate-500 mt-3 leading-relaxed"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs no-print">
+        <p class="font-semibold text-slate-200">SPNF SKB Muara Jawa • Program Pendidikan Kesetaraan Paket C</p>
+        <p class="mt-1">Dokumen Digital Bank Soal Mata Pelajaran Ekonomi Kelas XI & XII • Tahun Pelajaran 2026/2027</p>
+    </footer>
+
+    <!-- Toast Notifikasi -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl text-sm font-medium transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+        <i class="fa-solid fa-circle-info text-blue-400"></i>
+        <span id="toastMessage">Pesan notifikasi</span>
+    </div>
+
+    <!-- Data Soal & Logika Aplikasi -->
+    <script>
+        // Database Lengkap Soal Kelas XI & Kelas XII
+        const examData = {
+            xi: {
+                title: "UJIAN PENDIDIKAN KESETARAAN (UPK)",
+                subtitle: "SATUAN PENDIDIKAN NON FORMAL - SKB MUARA JAWA",
+                program: "PAKET C KELAS XI SEMESTER GANJIL",
+                year: "TAHUN AJARAN 2026/2027",
+                meta: [
+                    { label: "Satuan Pendidikan", value: "SPNF SKB Muara Jawa" },
+                    { label: "Mata Pelajaran", value: "Ekonomi" },
+                    { label: "Kelas / Semester", value: "XI / Ganjil" },
+                    { label: "Tahun Pelajaran", value: "2026/2027" }
+                ],
+                instructions: [
+                    "Berdoalah sebelum mengerjakan soal.",
+                    "Tulislah nama dan identitas pada lembar jawaban yang tersedia.",
+                    "Bacalah setiap soal dengan teliti.",
+                    "Pilihlah satu jawaban yang paling tepat dengan mengklik huruf A, B, C, D, atau E.",
+                    "Kerjakan soal esai dengan jelas dan sistematis."
+                ],
+                scoringNote: "Rumus nilai akhir: Nilai = skor pilihan ganda + skor esai. Skor esai diberikan berdasarkan ketepatan konsep, kelengkapan jawaban, dan kejelasan penjelasan.",
+                mcq: [
+                    {
+                        no: 1,
+                        q: "Pendapatan nasional yang dihitung dengan menjumlahkan seluruh balas jasa yang diterima pemilik faktor produksi selama satu tahun disebut pendekatan ....",
+                        options: { A: "produksi", B: "pendapatan", C: "pengeluaran", D: "konsumsi", E: "distribusi" },
+                        ans: "B",
+                        explanation: "Pendekatan pendapatan (income approach) menghitung pendapatan nasional dengan menjumlahkan seluruh balas jasa faktor produksi, yaitu upah/gaji (tenaga kerja), sewa (tanah), bunga (modal), dan laba (kewirausahaan)."
+                    },
+                    {
+                        no: 2,
+                        q: "Komponen yang termasuk dalam pendekatan pengeluaran untuk menghitung pendapatan nasional adalah ....",
+                        options: { A: "upah, sewa, bunga, dan laba", B: "nilai tambah seluruh sektor produksi", C: "konsumsi rumah tangga, tabungan, pajak, dan upah", D: "konsumsi, investasi, pengeluaran pemerintah, ekspor neto", E: "gaji pegawai, sewa tanah, dan keuntungan perusahaan" },
+                        ans: "D",
+                        explanation: "Rumus pendekatan pengeluaran adalah Y = C + I + G + (X - M), yang terdiri dari Konsumsi rumah tangga (C), Investasi (I), Pengeluaran pemerintah (G), dan Ekspor neto (X - M)."
+                    },
+                    {
+                        no: 3,
+                        q: "Perhatikan kegiatan berikut: (1) petani menjual gabah kepada penggilingan; (2) penggilingan menjual beras kepada pedagang; (3) pedagang menjual beras kepada konsumen. Untuk menghindari penghitungan ganda, pendapatan nasional dengan pendekatan produksi dihitung berdasarkan ....",
+                        options: { A: "seluruh nilai transaksi dari petani hingga konsumen", B: "nilai tambah pada setiap tahap produksi", C: "jumlah tenaga kerja di setiap tahap", D: "keuntungan pedagang saja", E: "harga bahan baku saja" },
+                        ans: "B",
+                        explanation: "Agar tidak terjadi penghitungan ganda (double counting), pendekatan produksi hanya menjumlahkan nilai tambah (value added) yang diciptakan pada setiap tahapan proses produksi."
+                    },
+                    {
+                        no: 4,
+                        q: "Diketahui konsumsi rumah tangga Rp500 triliun, investasi Rp150 triliun, pengeluaran pemerintah Rp200 triliun, ekspor Rp100 triliun, dan impor Rp80 triliun. Besarnya pendapatan nasional dengan pendekatan pengeluaran adalah ....",
+                        options: { A: "Rp850 triliun", B: "Rp870 triliun (Opsi B)", C: "Rp870 triliun", D: "Rp870 triliun (Opsi D)", E: "Rp1.030 triliun" },
+                        ans: "C",
+                        explanation: "Y = C + I + G + (X - M) = 500 + 150 + 200 + (100 - 80) = 850 + 20 = Rp870 triliun. (Catatan: Pada naskah asli opsi B, C, D tertulis sama; kunci resmi menetapkan C)."
+                    },
+                    {
+                        no: 5,
+                        q: "Pendapatan per kapita diperoleh dengan cara ....",
+                        options: { A: "membagi jumlah penduduk dengan jumlah pengangguran", B: "mengalikan pendapatan nasional dengan jumlah penduduk", C: "membagi pendapatan nasional dengan jumlah penduduk", D: "mengurangi pendapatan nasional dengan konsumsi", E: "membagi jumlah ekspor dengan jumlah impor" },
+                        ans: "C",
+                        explanation: "Pendapatan per kapita adalah rata-rata pendapatan penduduk suatu negara, dihitung dengan rumus: Pendapatan Nasional (PDB/PNB) dibagi Jumlah Penduduk."
+                    },
+                    {
+                        no: 6,
+                        q: "Pertumbuhan ekonomi suatu negara biasanya ditunjukkan oleh ....",
+                        options: { A: "meningkatnya jumlah penduduk miskin", B: "menurunnya jumlah perusahaan", C: "meningkatnya produksi barang dan jasa yang tercermin dalam kenaikan PDB riil", D: "meningkatnya harga barang secara terus-menerus", E: "berkurangnya kegiatan perdagangan" },
+                        ans: "C",
+                        explanation: "Pertumbuhan ekonomi mengukur peningkatan kapasitas produksi barang dan jasa riil dalam perekonomian dari satu periode ke periode berikutnya melalui kenaikan PDB riil."
+                    },
+                    {
+                        no: 7,
+                        q: "Menurut teori pertumbuhan ekonomi klasik, faktor yang berperan penting dalam pertumbuhan ekonomi antara lain ....",
+                        options: { A: "teknologi digital dan jaringan internet saja", B: "jumlah penduduk, stok barang modal, luas tanah, dan teknologi", C: "jumlah uang beredar saja", D: "kebijakan ekspor tanpa memperhatikan produksi", E: "konsumsi rumah tangga saja" },
+                        ans: "B",
+                        explanation: "Tokoh ekonomi klasik (seperti Adam Smith dan David Ricardo) menekankan bahwa pertumbuhan output dipengaruhi oleh empat faktor utama: jumlah penduduk, persediaan barang modal, luas tanah/SDA, dan tingkat teknologi."
+                    },
+                    {
+                        no: 8,
+                        q: "Salah satu gagasan utama teori pertumbuhan ekonomi Schumpeter adalah ....",
+                        options: { A: "pertumbuhan hanya ditentukan oleh luas wilayah", B: "pertumbuhan ekonomi tidak memerlukan perubahan", C: "inovasi dan peran wirausaha mendorong pertumbuhan ekonomi", D: "pertumbuhan hanya ditentukan oleh jumlah penduduk", E: "kegiatan ekonomi harus selalu tetap" },
+                        ans: "C",
+                        explanation: "Joseph Schumpeter berpendapat bahwa motor penggerak utama pertumbuhan ekonomi adalah inovasi yang dilakukan oleh para pengusaha/wirausahawan (entrepreneur)."
+                    },
+                    {
+                        no: 9,
+                        q: "Perbedaan utama pertumbuhan ekonomi dan pembangunan ekonomi adalah ....",
+                        options: { A: "pertumbuhan hanya membahas pemerataan", B: "pembangunan hanya mengukur kenaikan harga", C: "pertumbuhan tidak dapat diukur", D: "pembangunan mencakup perubahan kualitas hidup dan struktur ekonomi, sedangkan pertumbuhan menekankan kenaikan output", E: "keduanya memiliki pengertian yang selalu sama" },
+                        ans: "D",
+                        explanation: "Pertumbuhan ekonomi bersifat kuantitatif (fokus pada kenaikan PDB/output), sedangkan pembangunan ekonomi bersifat kualitatif dan kuantitatif (mencakup pemerataan, kualitas SDM, dan perubahan struktur ekonomi)."
+                    },
+                    {
+                        no: 10,
+                        q: "Koefisien Gini digunakan untuk mengukur ....",
+                        options: { A: "tingkat inflasi", B: "tingkat pengangguran", C: "pertumbuhan penduduk", D: "tingkat ketimpangan distribusi pendapatan", E: "jumlah produksi nasional" },
+                        ans: "D",
+                        explanation: "Koefisien Gini (Gini Ratio) adalah indikator statistik yang digunakan untuk mengukur derajat ketimpangan atau ketidakmerataan distribusi pendapatan di suatu negara."
+                    },
+                    {
+                        no: 11,
+                        q: "Nilai koefisien Gini yang mendekati 0 menunjukkan bahwa distribusi pendapatan ....",
+                        options: { A: "semakin merata", B: "semakin timpang", C: "tidak dapat dihitung", D: "sepenuhnya dikuasai pemerintah", E: "tidak berhubungan dengan kesejahteraan" },
+                        ans: "A",
+                        explanation: "Rentang nilai Koefisien Gini adalah 0 hingga 1. Nilai 0 berarti pemerataan sempurna (semakin merata), sedangkan nilai mendekati 1 berarti ketimpangan sempurna."
+                    },
+                    {
+                        no: 12,
+                        q: "Kurva Lorenz menggambarkan hubungan antara ....",
+                        options: { A: "tingkat harga dan jumlah barang", B: "persentase kumulatif penduduk dan persentase kumulatif pendapatan", C: "jumlah tenaga kerja dan upah", D: "ekspor dan impor", E: "konsumsi dan tabungan" },
+                        ans: "B",
+                        explanation: "Kurva Lorenz memetakan persentase kumulatif jumlah penduduk (sumbu horizontal) terhadap persentase kumulatif pendapatan yang diterima (sumbu vertikal)."
+                    },
+                    {
+                        no: 13,
+                        q: "Kemiskinan yang terjadi karena seseorang tidak mampu memenuhi kebutuhan dasar minimum disebut kemiskinan ....",
+                        options: { A: "relatif", B: "kultural", C: "absolut", D: "subjektif", E: "sementara" },
+                        ans: "C",
+                        explanation: "Kemiskinan absolut terjadi apabila tingkat pendapatan seseorang berada di bawah garis kemiskinan sehingga tidak cukup untuk memenuhi kebutuhan dasar hidup minimum (pangan, sandang, papan, kesehatan, pendidikan)."
+                    },
+                    {
+                        no: 14,
+                        q: "Seseorang merasa miskin karena membandingkan kondisi ekonominya dengan kelompok masyarakat yang lebih sejahtera. Hal tersebut merupakan kemiskinan ....",
+                        options: { A: "absolut", B: "struktural", C: "kultural", D: "relatif", E: "alamiah" },
+                        ans: "D",
+                        explanation: "Kemiskinan relatif timbul akibat ketimpangan distribusi pendapatan dan perbandingan status ekonomi seseorang dengan standar masyarakat di sekitarnya."
+                    },
+                    {
+                        no: 15,
+                        q: "Salah satu contoh kemiskinan struktural adalah ....",
+                        options: { A: "masyarakat sulit memperoleh pekerjaan karena akses pendidikan, modal, dan kesempatan ekonomi sangat terbatas", B: "seseorang memilih hidup sederhana meskipun mampu", C: "seseorang merasa kurang mampu karena membandingkan dirinya dengan tetangga", D: "pendapatan seseorang turun sementara akibat sakit singkat", E: "seseorang tidak membeli barang mewah" },
+                        ans: "A",
+                        explanation: "Kemiskinan struktural disebabkan oleh faktor eksternal berupa struktur sosial, kebijakan, atau sistem ekonomi yang menghambat akses masyarakat terhadap sumber daya dan peluang ekonomi."
+                    },
+                    {
+                        no: 16,
+                        q: "Perkembangan ekonomi digital dapat memberikan manfaat berupa ....",
+                        options: { A: "menghilangkan seluruh kebutuhan tenaga kerja", B: "memperluas akses pasar dan memudahkan transaksi ekonomi", C: "menghentikan kegiatan produksi", D: "mengurangi pilihan konsumen", E: "membatasi informasi harga" },
+                        ans: "B",
+                        explanation: "Ekonomi digital memanfaatkan platform daring untuk memperluas jangkauan pemasaran produk hingga lintas wilayah serta mempercepat efisiensi transaksi."
+                    },
+                    {
+                        no: 17,
+                        q: "Penduduk yang berada pada usia kerja dan mampu melakukan pekerjaan disebut ....",
+                        options: { A: "konsumen", B: "tenaga kerja", C: "bukan angkatan kerja", D: "pengusaha", E: "pencari nafkah saja" },
+                        ans: "B",
+                        explanation: "Menurut UU Ketenagakerjaan, tenaga kerja adalah setiap orang yang mampu melakukan pekerjaan guna menghasilkan barang dan/atau jasa baik untuk memenuhi kebutuhan sendiri maupun masyarakat."
+                    },
+                    {
+                        no: 18,
+                        q: "Angkatan kerja terdiri atas ....",
+                        options: { A: "seluruh penduduk tanpa batas usia", B: "penduduk usia kerja yang bekerja dan penganggur yang sedang mencari pekerjaan", C: "seluruh pelajar dan ibu rumah tangga", D: "penduduk yang tidak ingin bekerja", E: "anak-anak dan lanjut usia" },
+                        ans: "B",
+                        explanation: "Angkatan kerja adalah bagian dari tenaga kerja (usia kerja 15–64 tahun) yang aktif secara ekonomi, mencakup penduduk yang bekerja dan pengangguran terbuka yang sedang mencari kerja."
+                    },
+                    {
+                        no: 19,
+                        q: "Kesempatan kerja dapat diartikan sebagai ....",
+                        options: { A: "jumlah penduduk yang bersekolah", B: "jumlah barang yang diproduksi", C: "tersedianya lapangan pekerjaan bagi angkatan kerja", D: "jumlah penduduk yang tidak bekerja", E: "jumlah perusahaan yang tutup" },
+                        ans: "C",
+                        explanation: "Kesempatan kerja menggambarkan permintaan tenaga kerja atau tersedianya lowongan/lapangan pekerjaan yang dapat diisi oleh angkatan kerja."
+                    },
+                    {
+                        no: 20,
+                        q: "Dokter, guru, dan akuntan termasuk tenaga kerja ....",
+                        options: { A: "tidak terdidik", B: "terlatih", C: "tidak terlatih", D: "terdidik", E: "musiman" },
+                        ans: "D",
+                        explanation: "Tenaga kerja terdidik (skilled labour) adalah tenaga kerja yang memperoleh keahlian pada suatu bidang melalui pendidikan formal di sekolah atau perguruan tinggi."
+                    },
+                    {
+                        no: 21,
+                        q: "Seorang montir memperoleh keterampilan melalui pelatihan dan pengalaman kerja. Ia termasuk tenaga kerja ....",
+                        options: { A: "terdidik", B: "terlatih", C: "tidak terdidik dan tidak terlatih", D: "sukarela", E: "musiman" },
+                        ans: "B",
+                        explanation: "Tenaga kerja terlatih (trained labour) memperoleh keahliannya melalui latihan kerja praktis, kursus keterampilan, dan pengalaman berulang, seperti montir, sopir, atau penjahit."
+                    },
+                    {
+                        no: 22,
+                        q: "Perhatikan data berikut: penduduk usia kerja 1.000 orang, penduduk yang bekerja 600 orang, dan penganggur yang sedang mencari kerja 100 orang. Jumlah angkatan kerja adalah ....",
+                        options: { A: "500 orang", B: "600 orang", C: "700 orang", D: "900 orang", E: "1.000 orang" },
+                        ans: "C",
+                        explanation: "Angkatan Kerja = Penduduk yang Bekerja + Penganggur yang Mencari Kerja = 600 + 100 = 700 orang. (Sisanya 300 orang adalah bukan angkatan kerja)."
+                    },
+                    {
+                        no: 23,
+                        q: "Pengangguran terbuka adalah kondisi ketika seseorang ....",
+                        options: { A: "bekerja kurang dari jam kerja normal tetapi masih ingin bekerja", B: "bekerja sesuai keahlian", C: "tidak bekerja dan sedang mencari pekerjaan atau mempersiapkan usaha", D: "bekerja tetapi produktivitasnya rendah karena terlalu banyak tenaga kerja", E: "berhenti bekerja sementara karena libur" },
+                        ans: "C",
+                        explanation: "Pengangguran terbuka (open unemployment) mencakup penduduk yang sama sekali tidak memiliki pekerjaan dan sedang aktif mencari kerja, mempersiapkan usaha, atau merasa tidak mungkin mendapat kerja."
+                    },
+                    {
+                        no: 24,
+                        q: "Seorang pekerja hanya memperoleh pekerjaan selama musim panen dan tidak bekerja pada musim lainnya. Kondisi tersebut termasuk pengangguran ....",
+                        options: { A: "teknologi", B: "friksional", C: "struktural", D: "musiman", E: "Terselubung" },
+                        ans: "D",
+                        explanation: "Pengangguran musiman terjadi karena perubahan musim atau fluktuasi kegiatan ekonomi berkala, umum terjadi pada sektor pertanian saat masa jeda antara tanam dan panen."
+                    },
+                    {
+                        no: 25,
+                        q: "Sebuah toko mempekerjakan terlalu banyak pegawai sehingga sebagian pegawai tidak memiliki pekerjaan yang jelas dan tambahan tenaga mereka tidak meningkatkan hasil kerja. Hal ini merupakan pengangguran ....",
+                        options: { A: "terbuka", B: "terselubung", C: "musiman", D: "friksional", E: "teknologi" },
+                        ans: "B",
+                        explanation: "Pengangguran terselubung (disguised unemployment) terjadi ketika jumlah tenaga kerja melebihi kebutuhan optimal sehingga produktivitas marjinal sebagian pekerja bernilai nol."
+                    },
+                    {
+                        no: 26,
+                        q: "Pekerja yang bekerja kurang dari jam kerja normal dan masih ingin menambah jam kerja disebut ....",
+                        options: { A: "pengangguran terbuka", B: "setengah penganggur", C: "pengangguran musiman", D: "pengangguran struktural", E: "bukan angkatan kerja" },
+                        ans: "B",
+                        explanation: "Setengah penganggur (underemployed) adalah mereka yang bekerja di bawah jam kerja normal (kurang dari 35 jam seminggu) dan masih mencari atau bersedia menerima pekerjaan tambahan."
+                    },
+                    {
+                        no: 27,
+                        q: "Penggunaan mesin otomatis menyebabkan sebagian pekerja kehilangan pekerjaan karena keterampilannya tidak lagi sesuai. Jenis pengangguran tersebut berkaitan dengan ....",
+                        options: { A: "musim", B: "perpindahan tempat tinggal", C: "perubahan teknologi", D: "hari libur", E: "kenaikan konsumsi" },
+                        ans: "C",
+                        explanation: "Pengangguran teknologi timbul akibat penggantian tenaga manusia oleh mesin otomatis atau perubahan metode produksi berbasis teknologi baru."
+                    },
+                    {
+                        no: 28,
+                        q: "Salah satu tujuan pemberian upah yang layak adalah ....",
+                        options: { A: "menurunkan produktivitas pekerja", B: "meningkatkan kesejahteraan pekerja dan mendorong motivasi kerja", C: "menghilangkan kebutuhan pelatihan", D: "membatasi kesempatan kerja", E: "mengurangi kualitas barang" },
+                        ans: "B",
+                        explanation: "Upah yang layak menjamin pemenuhan kebutuhan hidup pekerja beserta keluarganya sekaligus meningkatkan semangat dan produktivitas kerja."
+                    },
+                    {
+                        no: 29,
+                        q: "Perhatikan ilustrasi: Rina baru lulus sekolah dan sedang mengirim lamaran ke beberapa perusahaan. Ia belum bekerja dan masih aktif mencari pekerjaan. Berdasarkan ilustrasi tersebut, Rina termasuk ....",
+                        options: { A: "bukan angkatan kerja", B: "tenaga kerja yang bekerja", C: "penganggur terbuka", D: "setengah penganggur", E: "pekerja musiman" },
+                        ans: "C",
+                        explanation: "Karena Rina sudah lulus (tidak lagi berstatus pelajar), belum bekerja, dan sedang aktif melamar pekerjaan, ia dikategorikan sebagai penganggur terbuka."
+                    },
+                    {
+                        no: 30,
+                        q: "Data suatu daerah menunjukkan angkatan kerja 700 orang, terdiri atas 600 orang bekerja dan 100 orang menganggur. Tingkat Pengangguran Terbuka (TPT) daerah tersebut adalah ....",
+                        options: { A: "10,00%", B: "12,50%", C: "14,29%", D: "16,67%", E: "20,00%" },
+                        ans: "C",
+                        explanation: "TPT = (Jumlah Penganggur / Jumlah Angkatan Kerja) × 100% = (100 / 700) × 100% = 14,2857% ≈ 14,29%."
+                    }
+                ],
+                essays: [
+                    {
+                        no: 1,
+                        q: "Jelaskan tiga pendekatan dalam menghitung pendapatan nasional dan berikan contoh komponen pada masing-masing pendekatan!",
+                        guide: "1) Pendekatan produksi: menjumlahkan nilai tambah seluruh barang dan jasa yang dihasilkan oleh berbagai sektor usaha (contoh: sektor pertanian, industri pengolahan, perdagangan). 2) Pendekatan pendapatan: menjumlahkan seluruh balas jasa pemilik faktor produksi (contoh: upah/gaji, sewa tanah, bunga modal, dan laba usaha). 3) Pendekatan pengeluaran: menjumlahkan seluruh pengeluaran pelaku ekonomi (contoh: konsumsi rumah tangga, investasi swasta, pengeluaran pemerintah, dan ekspor neto)."
+                    },
+                    {
+                        no: 2,
+                        q: "Diketahui PDB riil suatu negara pada tahun 2024 sebesar Rp800 triliun dan pada tahun 2025 sebesar Rp840 triliun. Hitunglah laju pertumbuhan ekonomi tahun 2025 dan tuliskan langkah perhitungannya!",
+                        guide: "Rumus: Laju Pertumbuhan Ekonomi = ((PDB Tahun Berjalan − PDB Tahun Sebelumnya) / PDB Tahun Sebelumnya) × 100%. Perhitungan: ((840 − 800) / 800) × 100% = (40 / 800) × 100% = 0,05 × 100% = 5%. Jadi, laju pertumbuhan ekonomi pada tahun 2025 adalah sebesar 5%."
+                    },
+                    {
+                        no: 3,
+                        q: "Jelaskan perbedaan kemiskinan absolut, relatif, kultural, dan struktural. Berikan masing-masing satu contoh!",
+                        guide: "1) Kemiskinan absolut: ketidakmampuan memenuhi kebutuhan dasar minimum (contoh: keluarga tidak mampu membeli makanan bergizi dan tempat tinggal layak). 2) Kemiskinan relatif: kondisi miskin bila dibandingkan dengan standar kesejahteraan masyarakat sekitar (contoh: warga berpenghasilan cukup untuk makan tetapi tertinggal jauh dari rata-rata pendapatan lingkungannya). 3) Kemiskinan kultural: disebabkan sikap/budaya yang menghambat kemajuan ekonomi (contoh: sikap pasrah, malas bekerja, atau boros). 4) Kemiskinan struktural: disebabkan sistem atau kebijakan yang membatasi akses ekonomi (contoh: warga terpencil sulit maju karena minimnya akses pendidikan dan modal usaha)."
+                    },
+                    {
+                        no: 4,
+                        q: "Jelaskan pengertian tenaga kerja, angkatan kerja, dan kesempatan kerja. Apa hubungan ketiganya dalam kegiatan ekonomi?",
+                        guide: "Tenaga kerja adalah penduduk usia kerja (15–64 tahun) yang mampu bekerja. Angkatan kerja adalah bagian dari tenaga kerja yang bekerja atau sedang mencari pekerjaan. Kesempatan kerja adalah tersedianya lapangan pekerjaan bagi angkatan kerja. Hubungannya: Tenaga kerja merupakan potensi SDM; angkatan kerja adalah bagian tenaga kerja yang masuk ke pasar kerja untuk mengisi kesempatan kerja yang tersedia. Jika angkatan kerja lebih besar dari kesempatan kerja, terjadilah pengangguran."
+                    },
+                    {
+                        no: 5,
+                        q: "Sebutkan dan jelaskan tiga upaya yang dapat dilakukan pemerintah untuk mengurangi pengangguran di Indonesia!",
+                        guide: "1) Memperluas kesempatan kerja melalui kemudahan investasi dan pembangunan infrastruktur padat karya. 2) Meningkatkan kualitas SDM melalui pelatihan vokasi, balai latihan kerja (BLK), dan pendidikan kejuruan agar sesuai kebutuhan industri. 3) Mendorong kewirausahaan dan pemberdayaan UMKM melalui bantuan permodalan (seperti KUR) dan pendampingan pemasaran digital."
+                    }
+                ]
+            },
+            xii: {
+                title: "PENILAIAN SEMESTER 1 • MATA PELAJARAN EKONOMI",
+                subtitle: "SATUAN PENDIDIKAN NON FORMAL - SKB MUARA JAWA",
+                program: "KELAS XII / PROGRAM PAKET C (BERBASIS AKM)",
+                year: "TAHUN AJARAN 2026/2027 • WAKTU: 90 MENIT",
+                meta: [
+                    { label: "Satuan Pendidikan", value: "SPNF SKB Muara Jawa" },
+                    { label: "Mata Pelajaran", value: "Ekonomi (Literasi & Numerasi AKM)" },
+                    { label: "Kelas / Semester", value: "XII / 1" },
+                    { label: "Alokasi Waktu", value: "90 Menit" }
+                ],
+                instructions: [
+                    "Bacalah setiap soal dengan teliti.",
+                    "Pilih satu jawaban yang paling tepat dengan mengklik huruf A, B, C, D, atau E.",
+                    "Beberapa soal berbentuk cerita/kontekstual dan mengukur kemampuan literasi numerasi (AKM).",
+                    "Jawablah soal esai dengan jelas dan runtut."
+                ],
+                scoringNote: "Pilihan ganda: 30 soal × 2 poin = 60 poin. Esai: 5 soal × 8 poin = 40 poin (8 = lengkap & akurat; 6 = sebagian besar benar; 4 = beberapa unsur benar; 2 = sangat terbatas; 0 = tidak sesuai). Nilai maksimal = 100.",
+                mcq: [
+                    {
+                        no: 1,
+                        q: "Pertumbuhan ekonomi ditandai oleh ....",
+                        options: { A: "meningkatnya jumlah uang beredar tanpa perubahan produksi", B: "meningkatnya produksi barang dan jasa secara riil", C: "meningkatnya harga barang saja", D: "bertambahnya jumlah penduduk saja", E: "menurunnya pendapatan nasional" },
+                        ans: "B",
+                        explanation: "Pertumbuhan ekonomi ditandai dengan meningkatnya kapasitas produksi barang dan jasa secara riil (tidak terpengaruh inflasi) dalam suatu perekonomian."
+                    },
+                    {
+                        no: 2,
+                        q: "Pembangunan ekonomi memiliki cakupan lebih luas daripada pertumbuhan ekonomi karena memperhatikan ....",
+                        options: { A: "jumlah uang kartal saja", B: "kenaikan harga barang", C: "perubahan kualitas hidup dan pemerataan kesejahteraan", D: "jumlah transaksi di pasar saja", E: "jumlah penduduk tanpa kualitasnya" },
+                        ans: "C",
+                        explanation: "Pembangunan ekonomi tidak hanya mengejar kenaikan PDB, tetapi juga pemerataan pendapatan, peningkatan derajat kesehatan, pendidikan, dan kualitas hidup masyarakat."
+                    },
+                    {
+                        no: 3,
+                        q: "Indikator yang umum digunakan untuk menghitung pertumbuhan ekonomi adalah ....",
+                        options: { A: "PDB riil", B: "indeks harga saham satu perusahaan", C: "jumlah uang di satu bank", D: "jumlah toko di satu kota", E: "nilai impor satu barang" },
+                        ans: "A",
+                        explanation: "Produk Domestik Bruto (PDB) riil digunakan karena mengukur nilai output barang dan jasa berdasarkan harga konstan sehingga mencerminkan kenaikan produksi yang sesungguhnya."
+                    },
+                    {
+                        no: 4,
+                        q: "Teori pertumbuhan Schumpeter menekankan peran penting ....",
+                        options: { A: "pembatasan inovasi", B: "pengurangan kualitas tenaga kerja", C: "penurunan investasi", D: "inovasi dan wirausaha", E: "penghapusan teknologi" },
+                        ans: "D",
+                        explanation: "Menurut Joseph Schumpeter, pertumbuhan ekonomi berkembang pesat berkat inovasi produk, metode produksi, dan perluasan pasar yang digerakkan oleh wirausahawan."
+                    },
+                    {
+                        no: 5,
+                        q: "Pembangunan ekonomi yang inklusif sebaiknya ....",
+                        options: { A: "hanya menguntungkan kelompok berpendapatan tinggi", B: "mengabaikan wilayah terpencil", C: "mengurangi akses pendidikan", D: "membatasi kesempatan kerja", E: "memperluas kesempatan dan manfaat bagi berbagai kelompok masyarakat" },
+                        ans: "E",
+                        explanation: "Pembangunan inklusif memastikan seluruh lapisan masyarakat, termasuk kelompok rentan dan wilayah terpencil, memperoleh akses dan manfaat pertumbuhan ekonomi secara adil."
+                    },
+                    {
+                        no: 6,
+                        q: "Kemiskinan absolut terjadi ketika seseorang atau keluarga ....",
+                        options: { A: "tidak mampu memenuhi kebutuhan dasar minimum", B: "memiliki pendapatan di atas rata-rata", C: "mampu membeli seluruh kebutuhan sekunder", D: "memiliki tabungan yang terus meningkat", E: "memiliki akses penuh pada semua layanan" },
+                        ans: "A",
+                        explanation: "Kemiskinan absolut diukur berdasarkan ketidakmampuan memenuhi standar kebutuhan hidup dasar minimum seperti pangan, sandang, papan, kesehatan, dan pendidikan."
+                    },
+                    {
+                        no: 7,
+                        q: "Salah satu upaya memutus lingkaran setan kemiskinan adalah ....",
+                        options: { A: "mengurangi pendidikan dan pelatihan", B: "membatasi akses modal produktif", C: "memperluas pendidikan, keterampilan, dan kesempatan usaha", D: "mengurangi layanan kesehatan", E: "menghambat pembangunan infrastruktur" },
+                        ans: "C",
+                        explanation: "Pendidikan, pelatihan keterampilan, dan akses modal usaha meningkatkan produktivitas tenaga kerja sehingga pendapatan meningkat dan memutus rantai kemiskinan."
+                    },
+                    {
+                        no: 8,
+                        q: "Ekonomi digital dapat mendorong kegiatan ekonomi karena ....",
+                        options: { A: "seluruh pekerjaan menjadi tidak diperlukan", B: "transaksi dan akses pasar dapat menjadi lebih efisien", C: "persaingan usaha selalu hilang", D: "harga semua barang pasti turun", E: "kegiatan ekspor-impor berhenti" },
+                        ans: "B",
+                        explanation: "Digitalisasi memangkas biaya perantara, mempercepat proses pembayaran, dan membuka akses pemasaran yang jauh lebih luas secara efisien."
+                    },
+                    {
+                        no: 9,
+                        q: "Perdagangan internasional adalah kegiatan ....",
+                        options: { A: "jual beli antardaerah dalam satu kabupaten", B: "pertukaran barang hanya di pasar tradisional", C: "produksi untuk konsumsi sendiri", D: "pertukaran barang dan jasa antarnegara", E: "transaksi antarbagian dalam satu perusahaan" },
+                        ans: "D",
+                        explanation: "Perdagangan internasional merupakan transaksi pertukaran barang dan jasa yang melintasi batas teritorial suatu negara dengan negara lain."
+                    },
+                    {
+                        no: 10,
+                        q: "Salah satu manfaat perdagangan internasional adalah ....",
+                        options: { A: "menghilangkan kebutuhan akan kualitas produk", B: "menutup akses ke pasar luar negeri", C: "menghapus semua persaingan", D: "membuat setiap negara memproduksi semua barang sendiri", E: "memperluas pasar dan memperoleh barang yang tidak efisien diproduksi sendiri" },
+                        ans: "E",
+                        explanation: "Melalui perdagangan internasional, negara dapat mengekspor komoditas unggulannya sekaligus mengimpor barang yang lebih murah/efisien jika diproduksi negara lain."
+                    },
+                    {
+                        no: 11,
+                        q: "Ekspor merupakan kegiatan ....",
+                        options: { A: "mengirim atau menjual barang/jasa ke luar negeri", B: "membeli barang dari luar negeri", C: "menyimpan barang di gudang", D: "menjual barang di dalam satu kota", E: "mengurangi produksi nasional" },
+                        ans: "A",
+                        explanation: "Ekspor adalah kegiatan mengeluarkan barang atau jasa dari daerah pabean dalam negeri untuk dijual ke luar negeri yang menghasilkan devisa negara."
+                    },
+                    {
+                        no: 12,
+                        q: "Impor merupakan kegiatan ....",
+                        options: { A: "menjual produk domestik ke luar negeri", B: "mengirim bantuan ke daerah lain", C: "membeli barang atau jasa dari luar negeri", D: "membayar upah pekerja", E: "menambah modal perusahaan tanpa transaksi luar negeri" },
+                        ans: "C",
+                        explanation: "Impor adalah kegiatan memasukkan atau membeli barang dan jasa dari luar negeri ke dalam negeri untuk memenuhi kebutuhan konsumsi maupun bahan baku industri."
+                    },
+                    {
+                        no: 13,
+                        q: "Jika suatu negara memiliki keunggulan komparatif dalam produksi kopi, negara tersebut sebaiknya ....",
+                        options: { A: "menghentikan produksi kopi", B: "mengkhususkan produksi pada barang yang biaya peluangnya relatif lebih rendah", C: "melarang semua perdagangan", D: "mengimpor seluruh kopi meski mampu memproduksi efisien", E: "menghasilkan semua barang dengan jumlah sama" },
+                        ans: "B",
+                        explanation: "Teori keunggulan komparatif (David Ricardo) menyarankan negara berspesialisasi pada komoditas yang memiliki biaya peluang (opportunity cost) paling rendah dibanding negara lain."
+                    },
+                    {
+                        no: 14,
+                        q: "Kebijakan tarif dalam perdagangan internasional adalah ....",
+                        options: { A: "batas maksimum jumlah barang yang boleh diimpor", B: "larangan mutlak atas semua ekspor", C: "subsidi kepada semua konsumen", D: "pungutan bea atas barang yang diperdagangkan lintas negara", E: "penetapan kurs oleh perusahaan swasta" },
+                        ans: "D",
+                        explanation: "Tarif adalah pajak atau bea masuk/keluar yang dikenakan pemerintah terhadap komoditas yang melintasi batas negara untuk melindungi industri domestik dan menambah kas negara."
+                    },
+                    {
+                        no: 15,
+                        q: "Kuota impor adalah kebijakan untuk ....",
+                        options: { A: "memberikan kebebasan impor tanpa batas", B: "menurunkan kualitas barang domestik", C: "menghapus pajak pendapatan", D: "menentukan gaji pekerja", E: "membatasi jumlah barang yang dapat diimpor" },
+                        ans: "E",
+                        explanation: "Kuota impor merupakan hambatan non-tarif berupa pembatasan kuantitas/jumlah maksimum unit barang tertentu yang diizinkan masuk ke dalam negeri dalam periode tertentu."
+                    },
+                    {
+                        no: 16,
+                        q: "Neraca perdagangan mencatat ....",
+                        options: { A: "perbandingan nilai ekspor dan impor barang", B: "jumlah seluruh penduduk bekerja", C: "jumlah pajak daerah", D: "pengeluaran rumah tangga saja", E: "total simpanan bank" },
+                        ans: "A",
+                        explanation: "Neraca perdagangan (balance of trade) adalah ikhtisar yang mencatat selisih antara nilai ekspor barang dan nilai impor barang suatu negara dalam periode tertentu."
+                    },
+                    {
+                        no: 17,
+                        q: "Jika nilai ekspor barang lebih besar daripada nilai impor barang, negara mengalami ....",
+                        options: { A: "inflasi", B: "defisit perdagangan", C: "surplus perdagangan", D: "resesi otomatis", E: "devaluasi pasti" },
+                        ans: "C",
+                        explanation: "Apabila nilai Ekspor > Impor, neraca perdagangan bernilai positif yang disebut surplus perdagangan (trade surplus)."
+                    },
+                    {
+                        no: 18,
+                        q: "Kerja sama ekonomi bilateral melibatkan ....",
+                        options: { A: "semua negara di dunia", B: "dua negara", C: "negara dalam satu kawasan saja dengan wajib anggota banyak", D: "hanya perusahaan swasta", E: "negara dan organisasi lokal saja" },
+                        ans: "B",
+                        explanation: "Kerja sama bilateral adalah hubungan kerja sama ekonomi yang terjalin secara langsung antara dua negara (misalnya Indonesia dan Jepang)."
+                    },
+                    {
+                        no: 19,
+                        q: "ASEAN merupakan contoh kerja sama ekonomi ....",
+                        options: { A: "bilateral", B: "antarperusahaan", C: "nasional", D: "regional", E: "individual" },
+                        ans: "D",
+                        explanation: "ASEAN (Association of Southeast Asian Nations) adalah kerja sama regional karena beranggotakan negara-negara yang berada dalam satu kawasan geografis, yaitu Asia Tenggara."
+                    },
+                    {
+                        no: 20,
+                        q: "IMF merupakan contoh lembaga kerja sama yang bersifat ....",
+                        options: { A: "lokal", B: "nasional", C: "bilateral saja", D: "antardaerah", E: "multilateral" },
+                        ans: "E",
+                        explanation: "IMF (International Monetary Fund) bersifat multilateral karena melibatkan banyak negara dari berbagai kawasan di seluruh dunia tanpa batasan wilayah tertentu."
+                    },
+                    {
+                        no: 21,
+                        tag: "AKM • Data Pertumbuhan",
+                        q: "PDB riil Negara Aruna pada 2024 sebesar Rp800 triliun dan pada 2025 sebesar Rp840 triliun. Laju pertumbuhan ekonomi 2025 adalah ....",
+                        options: { A: "5%", B: "4%", C: "8%", D: "10%", E: "40%" },
+                        ans: "A",
+                        explanation: "Laju Pertumbuhan = ((840 - 800) / 800) × 100% = (40 / 800) × 100% = 5%."
+                    },
+                    {
+                        no: 22,
+                        tag: "AKM • Cerita UMKM",
+                        q: "Kelompok pengrajin rotan di Muara Jawa mulai menjual produknya melalui platform digital. Pesanan dari luar daerah meningkat, tetapi mereka perlu menjaga kualitas dan pengiriman. Manfaat utama digitalisasi bagi kelompok tersebut adalah ....",
+                        options: { A: "menghilangkan seluruh biaya produksi", B: "menjamin semua produk pasti laku", C: "memperluas jangkauan pasar dan memudahkan transaksi", D: "menghapus kebutuhan pengemasan", E: "menghilangkan persaingan usaha" },
+                        ans: "C",
+                        explanation: "Pemanfaatan platform digital memungkinkan produk lokal Muara Jawa menjangkau pembeli di luar daerah dengan sistem transaksi yang praktis."
+                    },
+                    {
+                        no: 23,
+                        tag: "AKM • Data Perdagangan",
+                        q: "Suatu negara mengekspor barang senilai US$150 miliar dan mengimpor barang senilai US$175 miliar. Kondisi neraca perdagangannya adalah ....",
+                        options: { A: "surplus US$25 miliar", B: "defisit US$25 miliar", C: "surplus US$325 miliar", D: "seimbang", E: "defisit US$150 miliar" },
+                        ans: "B",
+                        explanation: "Saldo Neraca Perdagangan = Ekspor - Impor = US$150 miliar - US$175 miliar = -US$25 miliar (mengalami defisit sebesar US$25 miliar)."
+                    },
+                    {
+                        no: 24,
+                        tag: "AKM • Cerita Kebijakan",
+                        q: "Pemerintah mengenakan tarif pada produk impor tertentu agar produsen dalam negeri memiliki ruang bersaing. Dampak yang mungkin terjadi adalah ....",
+                        options: { A: "harga barang impor selalu turun", B: "impor pasti menjadi nol", C: "produsen domestik tidak perlu berinovasi", D: "harga produk impor dapat meningkat dan penerimaan bea masuk bertambah", E: "ekspor negara pasti berhenti" },
+                        ans: "D",
+                        explanation: "Pengenaan tarif menambah beban pajak pada barang impor sehingga harga jualnya di pasar domestik naik, sekaligus memberikan pemasukan bea masuk bagi negara."
+                    },
+                    {
+                        no: 25,
+                        tag: "AKM • Cerita Tenaga Kerja",
+                        q: "Sebuah daerah mengembangkan pelatihan desain, pemasaran digital, dan pengelolaan keuangan bagi UMKM. Kebijakan ini terutama mendukung pembangunan ekonomi melalui ....",
+                        options: { A: "pengurangan keterampilan", B: "peningkatan ketergantungan impor", C: "penghapusan semua risiko usaha", D: "penurunan produktivitas", E: "peningkatan kualitas sumber daya manusia dan produktivitas" },
+                        ans: "E",
+                        explanation: "Pelatihan keterampilan manajerial dan digital merupakan investasi modal manusia (human capital) yang langsung meningkatkan daya saing dan produktivitas pelaku UMKM."
+                    },
+                    {
+                        no: 26,
+                        tag: "AKM • Data Kemiskinan",
+                        q: "Setelah program pelatihan dan bantuan modal, sebagian warga mulai membuka usaha. Agar program berkelanjutan, pemerintah paling tepat ....",
+                        options: { A: "mendampingi usaha, memperluas akses pasar, dan mengevaluasi hasil program", B: "menghentikan seluruh pelatihan", C: "membatasi akses bahan baku", D: "mewajibkan semua usaha menjual produk yang sama", E: "mengabaikan perkembangan pendapatan warga" },
+                        ans: "A",
+                        explanation: "Bantuan modal awal perlu diikuti pendampingan berkelanjutan, pembukaan akses pasar, serta evaluasi berkala agar usaha warga mampu bertahan dan berkembang mandiri."
+                    },
+                    {
+                        no: 27,
+                        tag: "AKM • Cerita Impor",
+                        q: "Sebuah pabrik mengimpor mesin yang belum dapat diproduksi dengan kualitas setara di dalam negeri. Mesin tersebut meningkatkan kapasitas produksi dan kualitas produk ekspor. Kesimpulan yang paling tepat adalah ....",
+                        options: { A: "impor selalu merugikan negara", B: "impor selalu mengurangi produksi", C: "impor barang modal dapat mendukung produktivitas dan daya saing", D: "semua mesin impor harus dilarang", E: "ekspor tidak berkaitan dengan teknologi" },
+                        ans: "C",
+                        explanation: "Impor tidak selalu berdampak negatif; impor barang modal berteknologi tinggi justru meningkatkan efisiensi produksi dan kualitas produk ekspor nasional."
+                    },
+                    {
+                        no: 28,
+                        tag: "AKM • Perbandingan",
+                        q: "Negara P dapat menghasilkan 1 ton beras dengan biaya peluang 2 unit kain, sedangkan Negara Q membutuhkan biaya peluang 4 unit kain untuk menghasilkan 1 ton beras. Negara yang memiliki keunggulan komparatif dalam beras adalah ....",
+                        options: { A: "Negara Q", B: "Negara P", C: "keduanya tidak memiliki keunggulan", D: "keduanya pasti sama", E: "tidak dapat ditentukan meski data tersedia" },
+                        ans: "B",
+                        explanation: "Negara P memiliki biaya peluang yang lebih rendah (2 unit kain < 4 unit kain) untuk menghasilkan 1 ton beras, sehingga Negara P unggul secara komparatif dalam produksi beras."
+                    },
+                    {
+                        no: 29,
+                        tag: "AKM • Cerita Kerja Sama",
+                        q: "Indonesia bekerja sama dengan negara-negara Asia Tenggara untuk mempermudah perdagangan dan memperkuat konektivitas kawasan. Bentuk kerja sama tersebut adalah ....",
+                        options: { A: "bilateral", B: "multilateral tanpa batas kawasan", C: "antarperusahaan", D: "regional", E: "lokal" },
+                        ans: "D",
+                        explanation: "Kerja sama antarnegara dalam satu wilayah geografis tertentu (Asia Tenggara) dikategorikan sebagai kerja sama ekonomi regional."
+                    },
+                    {
+                        no: 30,
+                        tag: "AKM • Analisis Kebijakan",
+                        q: "Pemerintah membatasi jumlah impor gula melalui kuota. Jika permintaan tetap tinggi dan pasokan domestik belum mencukupi, akibat yang mungkin terjadi adalah ....",
+                        options: { A: "harga gula pasti menjadi nol", B: "impor meningkat tanpa batas", C: "produksi domestik langsung berlipat ganda", D: "tidak ada perubahan pasar", E: "pasokan terbatas dapat mendorong kenaikan harga" },
+                        ans: "E",
+                        explanation: "Sesuai hukum permintaan dan penawaran, ketika jumlah pasokan (supply) dibatasi kuota sementara permintaan tetap tinggi, akan terjadi kelangkaan relatif yang mendorong kenaikan harga."
+                    }
+                ],
+                essays: [
+                    {
+                        no: 1,
+                        q: "Jelaskan perbedaan pertumbuhan ekonomi dan pembangunan ekonomi, serta berikan masing-masing satu indikator atau contoh.",
+                        guide: "Pertumbuhan ekonomi adalah kenaikan kapasitas produksi barang/jasa (PDB riil) dari waktu ke waktu tanpa melihat pemerataan (indikator: laju kenaikan PDB riil tahunan). Pembangunan ekonomi memiliki cakupan lebih luas karena mencakup perubahan struktur ekonomi, peningkatan kualitas hidup, dan pemerataan kesejahteraan (indikator/contoh: peningkatan Indeks Pembangunan Manusia/IPM, penurunan angka kemiskinan, dan perbaikan layanan pendidikan/kesehatan)."
+                    },
+                    {
+                        no: 2,
+                        q: "Sebutkan tiga manfaat perdagangan internasional bagi suatu negara.",
+                        guide: "1) Memperluas jangkauan pasar bagi produk dalam negeri sehingga meningkatkan skala produksi. 2) Memperoleh barang, jasa, atau teknologi modern yang belum mampu atau tidak efisien jika diproduksi sendiri di dalam negeri. 3) Menambah perolehan devisa negara dari kegiatan ekspor dan membuka lapangan pekerjaan baru."
+                    },
+                    {
+                        no: 3,
+                        q: "Negara M mengekspor barang senilai US$90 miliar dan mengimpor US$75 miliar. Hitung saldo neraca perdagangan dan jelaskan kondisinya.",
+                        guide: "Saldo Neraca Perdagangan = Nilai Ekspor − Nilai Impor = US$90 miliar − US$75 miliar = +US$15 miliar. Kondisinya adalah SURPLUS PERDAGANGAN sebesar US$15 miliar karena nilai ekspor barang lebih besar dibandingkan nilai impor barang."
+                    },
+                    {
+                        no: 4,
+                        q: "Jelaskan perbedaan tarif dan kuota impor serta kemungkinan dampak masing-masing.",
+                        guide: "Tarif adalah pungutan pajak/bea masuk atas barang impor; dampaknya harga barang impor menjadi lebih mahal di pasar domestik dan penerimaan pajak negara bertambah. Kuota impor adalah pembatasan jumlah maksimum unit barang yang boleh diimpor; dampaknya volume pasokan impor terbatas secara fisik sehingga berpotensi menaikkan harga barang apabila produksi dalam negeri belum mencukupi kebutuhan."
+                    },
+                    {
+                        no: 5,
+                        q: "Sebuah UMKM memiliki produk berkualitas tetapi penjualannya terbatas. Usulkan tiga langkah yang dapat dilakukan untuk memanfaatkan ekonomi digital dan meningkatkan daya saing.",
+                        guide: "1) Memasarkan produk melalui marketplace (lokapasar) dan media sosial dengan foto produk serta deskripsi yang menarik agar menjangkau konsumen luar daerah. 2) Menyediakan metode pembayaran digital (seperti QRIS/transfer) serta bekerja sama dengan jasa ekspedisi untuk mempermudah transaksi. 3) Memperbaiki kualitas kemasan agar aman saat pengiriman dan menjaga konsistensi mutu serta layanan pelanggan."
+                    }
+                ]
+            }
+        };
+
+        // State Aplikasi
+        let currentTab = 'xi';
+        let userAnswers = { xi: {}, xii: {} };
+        let showAllKeys = false;
+
+        // Fungsi Inisialisasi Saat Halaman Dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderExam();
+        });
+
+        // Ganti Tab Kelas XI / Kelas XII
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tampilan tombol tab
+            const tabXi = document.getElementById('tab-xi');
+            const tabXii = document.getElementById('tab-xii');
+            
+            if (tab === 'xi') {
+                tabXi.className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 bg-blue-600 text-white shadow";
+                tabXii.className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100";
+            } else {
+                tabXii.className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 bg-blue-600 text-white shadow";
+                tabXi.className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100";
+            }
+
+            document.getElementById('searchInput').value = '';
+            renderExam();
+            showToast(`Menampilkan Naskah Soal Paket C Kelas ${tab.toUpperCase()}`);
+        }
+
+        // Render Keseluruhan Halaman Soal
+        function renderExam() {
+            const data = examData[currentTab];
+            
+            // 1. Render Kop Naskah Ujian
+            const headerHtml = `
+                <div class="text-center border-b-2 border-slate-800 pb-5 mb-5">
+                    <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-wide">${data.title}</h2>
+                    <h3 class="text-base sm:text-lg font-bold text-blue-800 mt-0.5">${data.subtitle}</h3>
+                    <p class="text-sm font-bold text-slate-700 mt-1">${data.program}</p>
+                    <p class="text-xs font-semibold text-slate-500 mt-0.5">${data.year}</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 mb-5 text-sm">
+                    ${data.meta.map(m => `
+                        <div class="flex justify-between sm:justify-start gap-2">
+                            <span class="font-semibold text-slate-600 w-36 shrink-0">${m.label}</span>
+                            <span class="text-slate-900 font-medium">: ${m.value}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="bg-blue-50/70 border border-blue-200 rounded-xl p-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-blue-900 mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-info"></i> Petunjuk Umum Pengerjaan:
+                    </h4>
+                    <ol class="list-decimal list-inside text-xs sm:text-sm text-slate-700 space-y-1">
+                        ${data.instructions.map(inst => `<li>${inst}</li>`).join('')}
+                    </ol>
+                </div>
+            `;
+            document.getElementById('examHeaderCard').innerHTML = headerHtml;
+
+            // 2. Render Pilihan Ganda
+            const mcqContainer = document.getElementById('mcqContainer');
+            mcqContainer.innerHTML = data.mcq.map(item => {
+                const selectedOpt = userAnswers[currentTab][item.no];
+                const isRevealed = showAllKeys || Boolean(selectedOpt);
+
+                return `
+                    <div class="question-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 transition hover:border-blue-300 print-shadow-none" data-search="${item.q.toLowerCase()} ${Object.values(item.options).join(' ').toLowerCase()}">
+                        <div class="flex items-start gap-3.5">
+                            <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-800 font-bold text-sm flex items-center justify-center shrink-0 mt-0.5 border border-slate-200">
+                                ${item.no}
+                            </span>
+                            <div class="flex-1">
+                                ${item.tag ? `<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200 mb-2">${item.tag}</span>` : ''}
+                                <p class="text-sm sm:text-base font-medium text-slate-800 leading-relaxed mb-4">${item.q}</p>
+                                
+                                <!-- Pilihan Jawaban A - E -->
+                                <div class="space-y-2">
+                                    ${Object.entries(item.options).map(([key, text]) => {
+                                        let btnStyle = "border-slate-200 bg-white hover:bg-slate-50 text-slate-700";
+                                        let badgeStyle = "bg-slate-100 text-slate-700 border-slate-300";
+                                        let iconHtml = "";
+
+                                        if (isRevealed) {
+                                            if (key === item.ans) {
+                                                btnStyle = "border-emerald-500 bg-emerald-50/80 text-emerald-950 font-semibold ring-1 ring-emerald-500";
+                                                badgeStyle = "bg-emerald-600 text-white border-emerald-600";
+                                                iconHtml = `<i class="fa-solid fa-circle-check text-emerald-600 ml-auto"></i>`;
+                                            } else if (selectedOpt === key && key !== item.ans) {
+                                                btnStyle = "border-rose-400 bg-rose-50 text-rose-950";
+                                                badgeStyle = "bg-rose-600 text-white border-rose-600";
+                                                iconHtml = `<i class="fa-solid fa-circle-xmark text-rose-600 ml-auto"></i>`;
+                                            }
+                                        }
+
+                                        return `
+                                            <button type="button" onclick="selectOption(${item.no}, '${key}')" class="w-full text-left p-3 rounded-xl border ${btnStyle} transition flex items-center gap-3 text-sm sm:text-base">
+                                                <span class="w-7 h-7 rounded-lg border ${badgeStyle} font-bold text-xs flex items-center justify-center shrink-0">
+                                                    ${key}
+                                                </span>
+                                                <span class="flex-1">${text}</span>
+                                                ${iconHtml}
+                                            </button>
+                                        `;
+                                    }).join('')}
+                                </div>
+
+                                <!-- Tombol Lihat Pembahasan Per Soal & Kotak Pembahasan -->
+                                <div class="mt-3 flex items-center justify-between no-print">
+                                    <button type="button" onclick="toggleSingleExplanation(${item.no})" class="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1.5 py-1">
+                                        <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                                        <span>${isRevealed ? 'Sembunyikan Pembahasan' : 'Lihat Kunci & Pembahasan'}</span>
+                                    </button>
+                                </div>
+
+                                <div id="exp-${item.no}" class="${isRevealed ? 'block' : 'hidden'} mt-3 p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm text-slate-800">
+                                    <div class="font-bold text-amber-900 mb-1 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-key text-amber-600"></i>
+                                        <span>Kunci Jawaban: ${item.ans}</span>
+                                    </div>
+                                    <p class="leading-relaxed text-slate-700"><span class="font-semibold">Pembahasan:</span> ${item.explanation}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // 3. Render Soal Esai
+            const essayContainer = document.getElementById('essayContainer');
+            essayContainer.innerHTML = data.essays.map(item => `
+                <div class="question-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 print-shadow-none" data-search="${item.q.toLowerCase()} ${item.guide.toLowerCase()}">
+                    <div class="flex items-start gap-3.5">
+                        <span class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-700 font-bold text-sm flex items-center justify-center shrink-0 mt-0.5 border border-indigo-200">
+                            ${item.no}
+                        </span>
+                        <div class="flex-1">
+                            <p class="text-sm sm:text-base font-semibold text-slate-800 leading-relaxed mb-3">${item.q}</p>
+                            
+                            <!-- Area Latihan Menulis Jawaban Esai -->
+                            <textarea rows="3" placeholder="Ketik jawaban latihan Anda di sini..." class="w-full p-3 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-50/50 mb-2 no-print"></textarea>
+                            
+                            <button type="button" onclick="toggleEssayGuide(${item.no})" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5 py-1 no-print">
+                                <i class="fa-solid fa-book-open-reader"></i>
+                                <span>Tampilkan / Sembunyikan Pedoman Jawaban</span>
+                            </button>
+
+                            <div id="essay-guide-${item.no}" class="${showAllKeys ? 'block' : 'hidden'} mt-2.5 p-3.5 rounded-xl bg-emerald-50/80 border border-emerald-200 text-xs sm:text-sm text-slate-800">
+                                <div class="font-bold text-emerald-900 mb-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-check-double text-emerald-600"></i>
+                                    <span>Pedoman Jawaban & Pembahasan:</span>
+                                </div>
+                                <p class="leading-relaxed text-slate-700">${item.guide}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // 4. Render Ringkasan Kunci Jawaban & Pedoman Penskoran
+            const answerKeyGrid = document.getElementById('answerKeyGrid');
+            answerKeyGrid.innerHTML = data.mcq.map(item => `
+                <div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
+                    <span class="font-semibold text-slate-500">${item.no}.</span>
+                    <span class="font-extrabold text-blue-700">${item.ans}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('scoringNotes').textContent = data.scoringNote;
+            updateScoreDisplay();
+        }
+
+        // Memilih Opsi Jawaban PG
+        function selectOption(questionNo, optionKey) {
+            userAnswers[currentTab][questionNo] = optionKey;
+            renderExam();
+        }
+
+        // Toggle Pembahasan Satu Soal PG
+        function toggleSingleExplanation(questionNo) {
+            const expBox = document.getElementById(`exp-${questionNo}`);
+            if (expBox) {
+                expBox.classList.toggle('hidden');
+            }
+        }
+
+        // Toggle Pedoman Jawaban Satu Soal Esai
+        function toggleEssayGuide(essayNo) {
+            const guideBox = document.getElementById(`essay-guide-${essayNo}`);
+            if (guideBox) {
+                guideBox.classList.toggle('hidden');
+            }
+        }
+
+        // Toggle Semua Kunci Jawaban & Pembahasan
+        function toggleAllExplanations() {
+            showAllKeys = !showAllKeys;
+            const btnText = document.getElementById('textToggleKeys');
+            const btnIcon = document.querySelector('#btnToggleKeys i');
+            
+            if (showAllKeys) {
+                btnText.textContent = "Sembunyikan Semua Kunci";
+                btnIcon.className = "fa-solid fa-eye-slash";
+                showToast("Semua kunci jawaban & pembahasan ditampilkan");
+            } else {
+                btnText.textContent = "Tampilkan Semua Kunci & Pembahasan";
+                btnIcon.className = "fa-solid fa-eye";
+                showToast("Kunci jawaban disembunyikan (Mode Latihan)");
+            }
+            renderExam();
+        }
+
+        // Hitung & Perbarui Skor PG
+        function updateScoreDisplay() {
+            const data = examData[currentTab];
+            const answers = userAnswers[currentTab];
+            let correct = 0;
+
+            data.mcq.forEach(item => {
+                if (answers[item.no] === item.ans) {
+                    correct++;
+                }
+            });
+
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('currentScore').textContent = correct * 2;
+        }
+
+        // Reset Jawaban Pengguna
+        function resetAnswers() {
+            userAnswers[currentTab] = {};
+            showAllKeys = false;
+            document.getElementById('textToggleKeys').textContent = "Tampilkan Semua Kunci & Pembahasan";
+            document.querySelector('#btnToggleKeys i').className = "fa-solid fa-eye";
+            renderExam();
+            showToast(`Jawaban latihan Kelas ${currentTab.toUpperCase()} telah direset`);
+        }
+
+        // Filter Pencarian Soal
+        function filterQuestions() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.question-card');
+            
+            cards.forEach(card => {
+                const content = card.getAttribute('data-search');
+                if (content.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle Tabel Ringkasan Kunci
+        function toggleSummaryTable() {
+            const content = document.getElementById('summaryContent');
+            content.classList.toggle('hidden');
+        }
+
+        // Notifikasi Toast Ringan
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2600);
+        }
+    </script>
+</body>
+</html>
